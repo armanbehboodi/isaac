@@ -1,0 +1,38 @@
+:root {
+  --sky: #1188AA66;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: cursive, sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+body .gr-root {
+  width: 100%;
+  height: 100%;
+  background: var(--sky);
+}
+body .gr-root .gr-isaac {
+  width: 65px;
+  height: 125px;
+  position: absolute;
+  bottom: -5px;
+  z-index: 10;
+}
+body .gr-root .gr-isaac img {
+  height: 130px;
+  object-fit: cover;
+  transform: translate(-30%, -5px);
+}
+body .gr-apple {
+  width: 45px;
+  height: 45px;
+  background-image: url("../img/apple.png");
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+}
+/*# sourceMappingURL=style.css.map */
