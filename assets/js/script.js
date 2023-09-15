@@ -91,7 +91,7 @@ $(function () {
                 isaacLeft = isaacOffset.left,
                 isaacTop = isaacOffset.top;
 
-            // $("#gr-final-song")[0].play();
+            $("#gr-final-song")[0].play();
 
             if (horizontalDir === "left" && windowWidth - isaacLeft > 80) $isaac.animate({left: '+=1'}, 0);
             else {
