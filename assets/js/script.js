@@ -113,6 +113,8 @@ $(function () {
     $body.on('keydown touchstart', function (e) {
         let selectedKey = e.type === "keydown" ? e.key : e.offsetX >= windowWidth - 50 ? "ArrowRight" : "ArrowLeft";
 
+        alert(selectedKey)
+
         if (!isGravityDiscovered && ['ArrowRight', 'ArrowLeft'].indexOf(selectedKey) !== -1 && !isMoving) {
             isMoving = true;
             isaacMoveHandler(selectedKey);
