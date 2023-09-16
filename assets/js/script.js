@@ -16,8 +16,10 @@ $(function () {
         else {
             movingTimer = setInterval(() => {
                 if (direction === "ArrowRight" && Number($isaac.css("right").replace("px", "")) > 0) {
+                    $isaac.css({transform: "rotateY(0deg)"});
                     $isaac.animate({left: "+=2"}, 0);
                 } else if (direction === "ArrowLeft" && Number($isaac.css("left").replace("px", "")) > 0) {
+                    $isaac.css({transform: "rotateY(180deg)"});
                     $isaac.animate({left: "-=2"}, 0);
                 }
             }, 0);
