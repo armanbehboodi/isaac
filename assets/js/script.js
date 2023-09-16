@@ -1,7 +1,7 @@
 $(function () {
-    let $body = $('body'),
+    let $body = $("body"),
         $window = $(window),
-        $isaac = $('.gr-isaac'),
+        $isaac = $(".gr-isaac"),
         windowHeight = $window.height(),
         windowWidth = $window.width(),
         isMoving = false,
@@ -15,10 +15,10 @@ $(function () {
         if (!direction) clearInterval(movingTimer);
         else {
             movingTimer = setInterval(() => {
-                if (direction === 'ArrowRight' && Number($isaac.css('right').replace('px', '')) > 0) {
-                    $isaac.animate({left: '+=2'}, 0);
-                } else if (direction === 'ArrowLeft' && Number($isaac.css('left').replace('px', '')) > 0) {
-                    $isaac.animate({left: '-=2'}, 0);
+                if (direction === "ArrowRight" && Number($isaac.css("right").replace("px", "")) > 0) {
+                    $isaac.animate({left: "+=2"}, 0);
+                } else if (direction === "ArrowLeft" && Number($isaac.css("left").replace("px", "")) > 0) {
+                    $isaac.animate({left: "-=2"}, 0);
                 }
             }, 0);
         }
@@ -27,15 +27,15 @@ $(function () {
     // creating apples in random locations
     const createApple = () => {
         appleGeneratorTimer = setInterval(() => {
-            let $apple = $('<div class="gr-apple"></div>');
+            let $apple = $("<div class='gr-apple'></div>");
 
-            $apple.css({left: `${Math.random() * $window.width()}px`});
+            $apple.css({left: `${Math.random() * $window.width() - 50}px`});
             $body.append($apple);
         }, 1000);
     }
     createApple();
 
-    // prevent from generating apples when user is not in the game's tab
+    // prevent from generating apples when user is not in the game"s tab
     $(window).focus(function () {
         if (!isGravityDiscovered) createApple();
     });
@@ -46,10 +46,10 @@ $(function () {
 
     // apples falling simulator
     fallingTimer = setInterval(() => {
-        let $apple = $('.gr-apple');
+        let $apple = $(".gr-apple");
 
         if ($apple.length > 0) {
-            $apple.animate({top: '+=2'}, 0);
+            $apple.animate({top: "+=2"}, 0);
 
             let isaacOffset = $isaac.offset();
 
@@ -95,33 +95,45 @@ $(function () {
 
             $("#gr-final-song")[0].play();
 
-            if (horizontalDir === "left" && windowWidth - isaacLeft > 80) $isaac.animate({left: '+=1'}, 0);
-            else {
+            if (horizontalDir === "left" && windowWidth - isaacLeft > 80) {
+                $isaac.animate({left: "+=1"}, 0);
+                $isaac.css({transform: "rotateY(0)"});
+            } else {
                 horizontalDir = "right";
-                if (isaacLeft > 5) $isaac.animate({left: '-=1'}, 0);
-                else horizontalDir = "left";
+                if (isaacLeft > 5) {
+                    $isaac.animate({left: "-=1"}, 0);
+                    $isaac.css({transform: "rotateY(180deg)"});
+                } else horizontalDir = "left";
             }
 
-            if (verticalDir === "top" && isaacTop > 0) $isaac.animate({top: '-=1'}, 0);
+            if (verticalDir === "top" && isaacTop > 0) $isaac.animate({top: "-=1"}, 0);
             else {
                 verticalDir = "bottom";
-                if (windowHeight - isaacTop > 80) $isaac.animate({top: '+=1'}, 0);
+                if (windowHeight - isaacTop > 80) $isaac.animate({top: "+=1"}, 0);
                 else verticalDir = "top";
             }
         }, 10);
     }
 
     // moving isaac with cursor keys
-    $body.on('keydown touchstart', function (e) {
-        let selectedKey = e.type === "keydown" ? e.key : $(e.target).attr('id');
+    $body.on("keydown touchstart", function (e) {
+        let isTouchEvent = e.type === "touchstart",
+            selectedKey = !isTouchEvent ? e.key : $(e.target).attr("id");
 
-        if (!isGravityDiscovered && ['ArrowRight', 'ArrowLeft'].indexOf(selectedKey) !== -1 && !isMoving) {
+        if (!isGravityDiscovered && ["ArrowRight", "ArrowLeft"].indexOf(selectedKey) !== -1 && !isMoving) {
+            if (isTouchEvent) $("#" + $(e.target).attr("id")).css({background: "rgba(0, 0, 0, 0.1)"});
+
             isMoving = true;
             isaacMoveHandler(selectedKey);
         }
     })
-        .on('keyup touchend', function () {
+        .on("keyup touchend", function (e) {
             isMoving = false;
             isaacMoveHandler(null);
+
+            if (e.type === "touchend") $("#" + $(e.target).attr("id")).css({background: "rgba(0, 0, 0, 0.05)"});
+        })
+        .on("click", ".gr-apple", function () {
+            if (isGravityDiscovered) location.reload();
         })
 })

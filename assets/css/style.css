@@ -14,6 +14,7 @@ body .gr-root {
   width: 100%;
   height: 100%;
   background: var(--sky);
+  position: relative;
   overflow: hidden;
 }
 body .gr-root .gr-isaac {
