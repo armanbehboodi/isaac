@@ -52,6 +52,9 @@ body .gr-apple {
   top: 0;
 }
 @media screen and (max-width: 768px) {
+  body .gr-root .gr-isaac {
+    bottom: 0;
+  }
   body .gr-root .gr-mobile-joystick {
     display: block;
     pointer-events: auto;
