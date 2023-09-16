@@ -86,6 +86,8 @@ $(function () {
         let verticalDir = "top",
             horizontalDir = "left";
 
+        clearInterval(appleGeneratorTimer);
+
         setInterval(function () {
             let isaacOffset = $isaac.offset(),
                 isaacLeft = isaacOffset.left,
@@ -110,7 +112,7 @@ $(function () {
     }
 
     // moving isaac with cursor keys
-    $body.on('keydown mousedown', function (e) {
+    $body.on('keydown touchstart', function (e) {
         let selectedKey = e.type === "keydown" ? e.key : $(e.target).attr('id');
 
         if (!isGravityDiscovered && ['ArrowRight', 'ArrowLeft'].indexOf(selectedKey) !== -1 && !isMoving) {
@@ -118,7 +120,7 @@ $(function () {
             isaacMoveHandler(selectedKey);
         }
     })
-        .on('keyup mouseup', function () {
+        .on('keyup touchend', function () {
             isMoving = false;
             isaacMoveHandler(null);
         })
