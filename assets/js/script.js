@@ -110,21 +110,16 @@ $(function () {
     }
 
     // moving isaac with cursor keys
-    $body.on('keydown touchstart', function (e) {
-        let selectedKey = e.type === "keydown" ? e.key : e.offsetX >= windowWidth - 50 ? "ArrowRight" : "ArrowLeft";
-
-        alert(selectedKey)
+    $body.on('keydown mousedown', function (e) {
+        let selectedKey = e.type === "keydown" ? e.key : $(e.target).attr('id');
 
         if (!isGravityDiscovered && ['ArrowRight', 'ArrowLeft'].indexOf(selectedKey) !== -1 && !isMoving) {
             isMoving = true;
             isaacMoveHandler(selectedKey);
         }
     })
-        .on('keyup', function () {
+        .on('keyup mouseup', function () {
             isMoving = false;
             isaacMoveHandler(null);
-        })
-        .on("mousedown",function (e) {
-            console.log(e)
         })
 })

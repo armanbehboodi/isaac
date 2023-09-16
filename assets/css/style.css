@@ -14,6 +14,7 @@ body .gr-root {
   width: 100%;
   height: 100%;
   background: var(--sky);
+  overflow: hidden;
 }
 body .gr-root .gr-isaac {
   width: 65px;
@@ -27,6 +28,20 @@ body .gr-root .gr-isaac img {
   object-fit: cover;
   transform: translate(-30%, -5px);
 }
+body .gr-root .gr-mobile-joystick {
+  display: none;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.05);
+  width: 20%;
+  height: 100%;
+  position: absolute;
+}
+body .gr-root .right-joystick {
+  right: 0;
+}
+body .gr-root .left-joystick {
+  left: 0;
+}
 body .gr-apple {
   width: 45px;
   height: 45px;
@@ -34,5 +49,11 @@ body .gr-apple {
   background-size: 100% 100%;
   position: absolute;
   top: 0;
+}
+@media screen and (max-width: 768px) {
+  body .gr-root .gr-mobile-joystick {
+    display: block;
+    pointer-events: auto;
+  }
 }
 /*# sourceMappingURL=style.css.map */
